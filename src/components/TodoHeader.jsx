@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 
-const TodoHeader = ({ userName, SetUserName, darkMode, setDarkMode, toggleDarkMode }) => {
-  useEffect(() => {
-    localStorage.setItem("darkMode", darkMode);
-  }, [darkMode]);
-
+const TodoHeader = ({ userName, setUserName, toggleDarkMode, theme }) => {
   return (
     <header className="w-full flex items-center justify-between ">
       <div className="flex flex-wrap">
@@ -14,14 +10,14 @@ const TodoHeader = ({ userName, SetUserName, darkMode, setDarkMode, toggleDarkMo
           type="text"
           placeholder="Name Here"
           value={userName}
-          onChange={(e) => SetUserName(e.target.value)}
+          onChange={(e) => setUserName(e.target.value)}
         />
       </div>
       <span
         className={
-          darkMode === "dark"
-            ? "cursor-pointer bg-slate-400 min-w-[48px] h-6 rounded-xl relative before:absolute before:w-5 before:h-5 before:rounded-full before:bg-slate-200 before:top-[50%] before:translate-y-[-50%] before:left-6 before:duration-500 before:ease"
-            : "cursor-pointer bg-slate-400  min-w-[48px] h-6 rounded-xl relative before:absolute before:w-5 before:h-5 before:rounded-full before:bg-slate-200 before:top-[50%] before:translate-y-[-50%] before:left-1 before:duration-500 before:ease"
+          theme === "dark"
+            ? "cursor-pointer bg-slate-400 dark:bg-[#082032] min-w-[48px] h-6 rounded-xl relative before:absolute before:w-5 before:h-5 before:rounded-full before:bg-slate-200 before:top-[50%] before:translate-y-[-50%] before:left-1 before:duration-500 before:ease"
+            : "cursor-pointer bg-yellow-600 min-w-[48px] h-6 rounded-xl relative before:absolute before:w-5 before:h-5 before:rounded-full before:bg-slate-200 before:top-[50%] before:translate-y-[-50%] before:left-6 before:duration-500 before:ease"
         }
         onClick={toggleDarkMode}
       ></span>

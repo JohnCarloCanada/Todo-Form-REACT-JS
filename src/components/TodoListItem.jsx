@@ -12,7 +12,7 @@ const TodoListItem = ({ todo, handleCheck, handleDelete, modalOpen, setModalOpen
     >
       <input className="w-10 h-10 cursor-pointer peer" type="checkbox" checked={todo.completed} onChange={() => handleCheck(todo.id)} />
       <input
-        className="w-full h-10 border-none outline-none font-semibold text-xl peer-checked:line-through"
+        className="w-full h-10 border-none outline-none font-semibold text-sm sm:text-xl peer-checked:line-through"
         type="text"
         value={todo.todo}
         readOnly

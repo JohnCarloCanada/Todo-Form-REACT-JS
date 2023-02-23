@@ -6,8 +6,11 @@ import TodoList from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")) || []);
-  const [userName, SetUserName] = useState(localStorage.getItem("username") || "");
-  const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") || "light");
+  const [userName, setUserName] = useState(localStorage.getItem("username") || "");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
+
   const [newTodos, setNewTodos] = useState("");
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("all");
@@ -19,6 +22,15 @@ function App() {
     localStorage.setItem("username", userName);
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [userName, todos]);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   const addTodos = () => {
     if (!newTodos || !category) return;
@@ -55,30 +67,13 @@ function App() {
     setEditTodo("");
   };
 
-  const onPageLoad = () => {
-    if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
-
   const toggleDarkMode = () => {
-    setDarkMode(darkMode === "dark" ? "light" : "dark");
-    if (darkMode === "dark") {
-      localStorage.theme = "dark";
-    } else if (darkMode === "light") {
-      localStorage.theme = "light";
-    } else {
-      localStorage.removeItem("theme");
-    }
+    setTheme(theme === "dark" ? "light" : "dark");
   };
-
-  onPageLoad();
 
   return (
     <main className="w-full min-h-screen bg-cyan-200 dark:bg-zinc-900 duration-500 ease py-2 px-4 pb-10">
-      <TodoHeader userName={userName} SetUserName={SetUserName} darkMode={darkMode} setDarkMode={setDarkMode} toggleDarkMode={toggleDarkMode} />
+      <TodoHeader userName={userName} setUserName={setUserName} toggleDarkMode={toggleDarkMode} theme={theme} />
       <TodoInput newTodos={newTodos} setNewTodos={setNewTodos} addTodos={addTodos} setCategory={setCategory} />
       <TodoList
         todos={todos.filter((todo) => (filter === "all" ? todo : todo.category.toLowerCase().includes(filter.toLowerCase())))}
