@@ -33,7 +33,7 @@ function App() {
   }, [theme]);
 
   const addTodos = () => {
-    if (!newTodos || !category) return;
+    if (!newTodos.trim() || newTodos.trim() === " " || !category) return;
     const id = todos.length ? todos[todos.length - 1].id + 1 : 1;
     const newTodoItem = { id, todo: newTodos, completed: false, category };
     const newTodoItems = [...todos, newTodoItem];
