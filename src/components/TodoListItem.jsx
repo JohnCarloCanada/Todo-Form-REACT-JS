@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-const TodoListItem = ({ todo, handleCheck, handleDelete, modalOpen, setModalOpen, handleEdit }) => {
+const TodoListItem = ({ todo, handleCheck, handleDelete, handleEdit }) => {
   return (
     <motion.section
       animate={{ opacity: 1, scale: 1 }}
