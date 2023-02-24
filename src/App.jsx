@@ -53,17 +53,21 @@ function App() {
 
   const handleEdit = (id) => {
     setModalOpen(!modalOpen);
+    document.body.style.overflow = "hidden";
     setEditID(id);
   };
 
   const addEditItem = (id) => {
-    if (!editTodo) {
+    if (!editTodo.trim() || editTodo.trim() === " ") {
       setModalOpen(!modalOpen);
+      document.body.style.overflow = "inherit";
+      setEditTodo("");
       return null;
     }
     const newTodoItems = todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo));
     setTodos(newTodoItems);
     setModalOpen(!modalOpen);
+    document.body.style.overflow = "inherit";
     setEditTodo("");
   };
 
@@ -72,7 +76,7 @@ function App() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-cyan-200 dark:bg-zinc-900 duration-500 ease py-2 px-4 pb-10">
+    <main className="w-full min-h-screen bg-cyan-200 dark:bg-zinc-900 duration-500 ease py-2 px-4 pb-5">
       <TodoHeader userName={userName} setUserName={setUserName} toggleDarkMode={toggleDarkMode} theme={theme} />
       <TodoInput newTodos={newTodos} setNewTodos={setNewTodos} addTodos={addTodos} setCategory={setCategory} />
       <TodoList

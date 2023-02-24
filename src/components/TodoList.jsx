@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const TodoList = ({ todos, setFilter, handleCheck, handleDelete, modalOpen, setModalOpen, handleEdit }) => {
   return (
     <>
-      <form className="w-full min-h-[350px]  bg-slate-200 p-3 mt-3 rounded-md" onSubmit={(e) => e.preventDefault()}>
+      <form className="w-full h-[350px] overflow-y-auto bg-slate-200 p-3 mt-3 rounded-md" onSubmit={(e) => e.preventDefault()}>
         <h2 className="mt-3 text-2xl sm:text-3xl">TODO LIST</h2>
         <label className="text-xl font-bold mr-3" htmlFor="categories">
           Choose a category:
