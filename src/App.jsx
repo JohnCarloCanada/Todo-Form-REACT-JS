@@ -3,14 +3,11 @@ import TodoEditModal from "./components/TodoEditModal";
 import TodoHeader from "./components/TodoHeader";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
+import useTailwindDarkMode from "./hooks/useTailwindDarkMode";
 
 function App() {
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")) || []);
   const [userName, setUserName] = useState(localStorage.getItem("username") || "");
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-  );
-
   const [newTodos, setNewTodos] = useState("");
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("all");
@@ -18,19 +15,12 @@ function App() {
   const [editTodo, setEditTodo] = useState("");
   const [editID, setEditID] = useState(null);
 
+  const [theme, toggleDarkMode] = useTailwindDarkMode();
+
   useEffect(() => {
     localStorage.setItem("username", userName);
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [userName, todos]);
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    if (localStorage.theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
 
   const addTodos = () => {
     if (!newTodos.trim() || newTodos.trim() === " " || !category) return;
@@ -69,10 +59,6 @@ function App() {
     setModalOpen(!modalOpen);
     document.body.style.overflow = "inherit";
     setEditTodo("");
-  };
-
-  const toggleDarkMode = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
