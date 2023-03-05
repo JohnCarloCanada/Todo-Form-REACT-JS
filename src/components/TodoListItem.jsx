@@ -1,7 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import DataContext from "../context/DataContext";
 import { motion } from "framer-motion";
 
-const TodoListItem = ({ todo, handleCheck, handleDelete, handleEdit }) => {
+const TodoListItem = ({ todo }) => {
+  const { todos, setTodos, setEditID, setModalOpen, modalOpen } = useContext(DataContext);
+
+  const handleCheck = (id) => {
+    const newTodoItems = todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
+    setTodos(newTodoItems);
+  };
+
+  const handleDelete = (id) => {
+    const newTodoItems = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodoItems);
+  };
+
+  const handleEdit = (id) => {
+    setModalOpen(!modalOpen);
+    document.body.style.overflow = "hidden";
+    setEditID(id);
+  };
+
   return (
     <motion.section
       animate={{ opacity: 1, scale: 1 }}

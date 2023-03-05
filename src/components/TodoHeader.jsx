@@ -1,6 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import useTailwindDarkMode from "../hooks/useTailwindDarkMode";
 
-const TodoHeader = ({ userName, setUserName, toggleDarkMode, theme }) => {
+const TodoHeader = () => {
+  const [userName, setUserName] = useState(localStorage.getItem("username") || "");
+  const [theme, toggleDarkMode] = useTailwindDarkMode();
+
+  useEffect(() => {
+    localStorage.setItem("username", userName);
+  }, [userName]);
+
   return (
     <header className="w-full flex items-center justify-between ">
       <div className="flex flex-wrap">

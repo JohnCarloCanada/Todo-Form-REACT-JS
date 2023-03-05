@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import DataContext from "../context/DataContext";
 
-const TodoInput = ({ newTodos, setNewTodos, addTodos, setCategory }) => {
+const TodoInput = () => {
+  const { todos, setTodos } = useContext(DataContext);
+  const [newTodos, setNewTodos] = useState("");
+  const [category, setCategory] = useState("");
+
+  const addTodos = () => {
+    if (!newTodos.trim() || newTodos.trim() === " " || !category) return;
+    const id = todos.length ? todos[todos.length - 1].id + 1 : 1;
+    const newTodoItem = { id, todo: newTodos, completed: false, category };
+    const newTodoItems = [...todos, newTodoItem];
+    setTodos(newTodoItems);
+    setNewTodos("");
+  };
+
   return (
     <form className="w-full flex-1 flex flex-col" onSubmit={(e) => e.preventDefault()}>
       <section className="mt-7">

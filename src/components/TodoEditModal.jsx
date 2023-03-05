@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import DataContext from "../context/DataContext";
 
-const TodoEditModal = ({ modalOpen, setModalOpen, editTodo, setEditTodo, editID, addEditItem }) => {
+const TodoEditModal = () => {
+  const { modalOpen, setModalOpen, editID, todos, setTodos } = useContext(DataContext);
+  const [editTodo, setEditTodo] = useState("");
+
+  const todo = todos.filter((todo) => todo.id === editID);
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) setEditTodo(todo[0].todo);
+
+    return () => (isMounted = false);
+  }, []);
+
+  const addEditItem = (id) => {
+    if (!editTodo.trim() || editTodo.trim() === " ") {
+      setModalOpen(!modalOpen);
+      document.body.style.overflow = "inherit";
+      setEditTodo("");
+      return null;
+    }
+    const newTodoItems = todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo));
+    setTodos(newTodoItems);
+    setModalOpen(!modalOpen);
+    document.body.style.overflow = "inherit";
+    setEditTodo("");
+  };
+
   return (
     <section className="w-full">
       <div

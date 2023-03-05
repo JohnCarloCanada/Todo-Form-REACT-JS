@@ -2,7 +2,7 @@ import React from "react";
 import TodoListItem from "./TodoListItem";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TodoList = ({ todos, setFilter, handleCheck, handleDelete, modalOpen, setModalOpen, handleEdit }) => {
+const TodoList = ({ todos, setFilter }) => {
   return (
     <>
       <form className="w-full h-[350px] overflow-y-auto bg-slate-200 p-3 mt-3 rounded-md" onSubmit={(e) => e.preventDefault()}>
@@ -25,15 +25,7 @@ const TodoList = ({ todos, setFilter, handleCheck, handleDelete, modalOpen, setM
         <motion.section layout>
           <AnimatePresence>
             {todos.map((todo) => (
-              <TodoListItem
-                key={todo.id}
-                todo={todo}
-                handleCheck={handleCheck}
-                handleDelete={handleDelete}
-                modalOpen={modalOpen}
-                setModalOpen={setModalOpen}
-                handleEdit={handleEdit}
-              />
+              <TodoListItem key={todo.id} todo={todo} />
             ))}
           </AnimatePresence>
         </motion.section>
