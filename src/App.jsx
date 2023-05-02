@@ -1,9 +1,6 @@
 import { useContext } from "react";
 import DataContext from "./context/DataContext";
-import TodoEditModal from "./components/TodoEditModal";
-import TodoHeader from "./components/TodoHeader";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
+import { TodoEditModal, TodoHeader, TodoInput, TodoList } from "./components";
 
 function App() {
   const { modalOpen, todos, filter, setFilter } = useContext(DataContext);

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import DataContext from "../context/DataContext";
-import { motion } from "framer-motion";
+import { AnimationSection } from "../components/ComponentsAnimation";
 
 const TodoListItem = ({ todo }) => {
   const { todos, setTodos, setEditID, setModalOpen, modalOpen } = useContext(DataContext);
@@ -22,13 +22,7 @@ const TodoListItem = ({ todo }) => {
   };
 
   return (
-    <motion.section
-      animate={{ opacity: 1, scale: 1 }}
-      initial={{ opacity: 0, scale: 0.5 }}
-      exit={{ opacity: 0, scale: 0.5 }}
-      layout
-      className="mt-4 w-full flex items-center bg-white rounded-sm px-2 gap-x-3"
-    >
+    <AnimationSection>
       <input className="w-10 h-10 cursor-pointer peer" type="checkbox" checked={todo.completed} onChange={() => handleCheck(todo.id)} />
       <input
         className="w-full h-10 border-none outline-none font-semibold text-sm sm:text-xl peer-checked:line-through"
@@ -52,7 +46,7 @@ const TodoListItem = ({ todo }) => {
           DELETE
         </button>
       </section>
-    </motion.section>
+    </AnimationSection>
   );
 };
 

@@ -1,8 +1,11 @@
-import React from "react";
-import TodoListItem from "./TodoListItem";
-import { motion, AnimatePresence } from "framer-motion";
+import { useContext } from "react";
+import DataContext from "../context/DataContext";
+import { Reorder } from "framer-motion";
+import { TodoListItem } from "../components";
+import { FramerMotionDragAndDeleteAnimation } from "../components/ComponentsAnimation";
 
 const TodoList = ({ todos, setFilter }) => {
+  const { setTodos } = useContext(DataContext);
   return (
     <>
       <form className="w-full h-[350px] overflow-y-auto bg-slate-200 p-3 mt-3 rounded-md" onSubmit={(e) => e.preventDefault()}>
@@ -21,14 +24,13 @@ const TodoList = ({ todos, setFilter }) => {
             personal
           </option>
         </select>
-
-        <motion.section layout>
-          <AnimatePresence>
-            {todos.map((todo) => (
-              <TodoListItem key={todo.id} todo={todo} />
-            ))}
-          </AnimatePresence>
-        </motion.section>
+        <FramerMotionDragAndDeleteAnimation>
+          {todos.map((todo) => (
+            <Reorder.Item key={todo.id} value={todo}>
+              <TodoListItem todo={todo} />
+            </Reorder.Item>
+          ))}
+        </FramerMotionDragAndDeleteAnimation>
       </form>
     </>
   );
