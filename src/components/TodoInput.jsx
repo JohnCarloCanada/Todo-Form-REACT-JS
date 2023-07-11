@@ -16,9 +16,14 @@ const TodoInput = () => {
   };
 
   return (
-    <form className="w-full flex-1 flex flex-col" onSubmit={(e) => e.preventDefault()}>
+    <form
+      className="w-full flex-1 flex flex-col"
+      onSubmit={(e) => e.preventDefault()}
+    >
       <section className="mt-7">
-        <h1 className="text-2xl sm:text-3xl dark:text-white duration-500 ease">CREATE A TODO</h1>
+        <h1 className="text-2xl sm:text-3xl dark:text-white duration-500 ease">
+          CREATE A TODO
+        </h1>
       </section>
       <p className="mt-2 text-[#888] font-bold">What's on your todo list?</p>
       <input
@@ -41,7 +46,10 @@ const TodoInput = () => {
             value="business"
             onChange={(e) => setCategory(e.target.value)}
           />
-          <label className="text-gray-500 font-semibold cursor-pointer hover:text-gray-700" htmlFor="business">
+          <label
+            className="text-gray-500 font-semibold cursor-pointer hover:text-gray-700"
+            htmlFor="business"
+          >
             Business
           </label>
         </section>
@@ -54,7 +62,10 @@ const TodoInput = () => {
             value="personal"
             onChange={(e) => setCategory(e.target.value)}
           />
-          <label className="text-gray-500 font-semibold cursor-pointer hover:text-gray-700" htmlFor="personal">
+          <label
+            className="text-gray-500 font-semibold cursor-pointer hover:text-gray-700"
+            htmlFor="personal"
+          >
             Personal
           </label>
         </section>

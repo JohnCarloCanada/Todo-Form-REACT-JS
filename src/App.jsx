@@ -10,7 +10,11 @@ function App() {
       <TodoHeader />
       <TodoInput />
       <TodoList
-        todos={todos.filter((todo) => (filter === "all" ? todo : todo.category.toLowerCase().includes(filter.toLowerCase())))}
+        todos={todos.filter((todo) =>
+          filter === "all"
+            ? todo
+            : todo.category.toLowerCase().includes(filter.toLowerCase())
+        )}
         setFilter={setFilter}
       />
       {modalOpen && <TodoEditModal />}
